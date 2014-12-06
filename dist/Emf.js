@@ -716,7 +716,7 @@ class HistoryStore extends Store {
 		});
 	}
 
-	_mutation(period) {
+	mutation(period) {
 		var previous = this.state;
 		period();
 
@@ -726,7 +726,7 @@ class HistoryStore extends Store {
 		}
 	}
 
-	_mutationChange(previous, current) {
+	mutationChange(previous, current) {
 		return !Object.is(previous, current);
 	}
 }
