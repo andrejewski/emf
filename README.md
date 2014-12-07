@@ -1,7 +1,7 @@
 EMF
 ===
 
-Classes and Integrations for Flux. Dispatcher, Store, and Actor ES6 classes. Directly extends the Flux Dispatcher, so upgrading is as simple changing the module name.
+Classes and integrations for Flux. Dispatcher, Store, and Actor ES6 classes. Directly extends the Flux Dispatcher, so upgrading is as simple as changing the module name.
 
 ```bash
 npm install emf
@@ -11,7 +11,7 @@ npm install emf
 var Dispatcher = require('emf').Dispatcher;
 ```
 
-EMF is a conservative [Flux](https://github.com/facebook/flux) implementation. The only goal of EMF is reducing the boilerplate of Flux applications. Putting logic into classes, most of Flux's inherit verbosity is reduced significantly and extending the classes is much more convenient.
+EMF is a conservative [Flux](https://github.com/facebook/flux) implementation. The only goal of EMF is reducing the boilerplate of Flux applications. Putting logic into classes, most of Flux's inherit verbosity is reduced significantly and extending is much more convenient.
 
 # Classes
 
@@ -29,9 +29,9 @@ Actors are created by by passing a Dispatcher instance. Any events fired from th
 
 ### fire()
 
-- `fire(source String, actionType String, data Any)`
-- `fire(actionType String, data Any)`
-- `fire(data Any)`
+- `fire(source String, actionType String, action Any)`
+- `fire(actionType String, action Any)`
+- `fire(action Any)`
 
 Dispatches payloads to the dispatcher as a struct.
 
@@ -39,8 +39,27 @@ Dispatches payloads to the dispatcher as a struct.
 Payload {
 	source Maybe String,
 	actionType Maybe String,
-	data Any	
+	action Any	
 }
+```
+
+### Actor Example
+
+```js
+var Actor = require('emf').Actor,
+	myDispatcher = require('../my/dispatcher');
+
+class DogActor extends Actor {
+	addDog(name, sex, breed) {
+		this.fire('addDog', {
+			name: name,
+			sex: sex,
+			breed: breed
+		});
+	}
+}
+
+module.exports = new DogActor(myDispatcher);
 ```
 
 ## Store
@@ -83,7 +102,7 @@ class DogStore extends Store {
 		return [];
 	}
 	onAddDogAction(payload) {
-		this.state.push(payload.data.dog);
+		this.state.push(payload.action.dog);
 		this.emitChange();
 	}
 }
@@ -96,6 +115,10 @@ module.exports = new DogStore(myDispatcher);
 This class is in development, but would essentially extend the Store class, allowing redo/undo of state. This class is most effective when combined with the [`immutable`](http://facebook.github.io/immutable-js/) module as diffs between state are easy to compute as they are immutable.
 
 Unlike all other classes, this one has not been tested. 
+
+## A Note on Extending
+
+EMF classes are compiled with the [`react-tools`](http://facebook.github.io/react/) transform using the harmony flag. This transform also expands JSX and other React and ES6 features. If you want to extend these classes in a build environment, take a look at [`gulp-react`](https://github.com/sindresorhus/gulp-react), [`grunt-react`](https://github.com/ericclemmons/grunt-react), or (when the owner gets off his butt and [passes the harmony flag](https://github.com/eddhannay/broccoli-react/issues/3)) [`broccoli-react`](https://github.com/eddhannay/broccoli-react). I am not certain whether the tranformed code is compaible with other ES6 transforms.
 
 # Non-classes
 
