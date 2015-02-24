@@ -1,6 +1,6 @@
 {
   "name": "emf",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Flux classes and integrations",
   "main": "index.js",
   "directories": {

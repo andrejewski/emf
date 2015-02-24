@@ -7,7 +7,7 @@ var path = require('path'),
 	del = require('del');
 
 gulp.task('clean', function(done) {
-	del(['lib/', 'Emf.js'], done);
+	del(['lib/'], done);
 });
 
 gulp.task('lib', function() {
@@ -26,5 +26,6 @@ gulp.task('browserify', function() {
 	.pipe(gulp.dest('./dist/'))
 });
 
-gulp.task('publish', ['clean', 'default']);
-gulp.task('default', ['lib', 'browserify']);
+gulp.task('pre-commit', ['clean']);
+gulp.task('pre-publish', ['lib', 'browserify'])
+gulp.task('default', ['pre-commit']);

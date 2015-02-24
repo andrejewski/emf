@@ -13,7 +13,7 @@ function StoreMixin(stores, pure, fn) {
 
 	return {
 		getInitialState: function() {
-			return fn(this.props);
+			return fn.call(this, this.props);
 		},
 
 		componentDidMount: function() {

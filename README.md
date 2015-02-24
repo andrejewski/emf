@@ -120,7 +120,7 @@ Unlike all other classes, this one has not been tested.
 
 ## A Note on Classes
 
-EMF classes are compiled with the [`react-tools`](http://facebook.github.io/react/) transform using the harmony flag. This transform also expands JSX and other React and ES6 features. If you want to extend these classes in a build environment, take a look at [`gulp-react`](https://github.com/sindresorhus/gulp-react), [`grunt-react`](https://github.com/ericclemmons/grunt-react), or (when the owner gets off his butt and [passes the harmony flag](https://github.com/eddhannay/broccoli-react/issues/3)) [`broccoli-react`](https://github.com/eddhannay/broccoli-react). I am not certain whether the transformed code is compatible with other ES6 transforms.
+EMF classes are compiled with the [`react-tools`](http://facebook.github.io/react/) transform using the harmony flag. This transform also expands JSX and other React and ES6 features. If you want to extend these classes in a build environment, take a look at [`gulp-react`](https://github.com/sindresorhus/gulp-react), [`grunt-react`](https://github.com/ericclemmons/grunt-react), or [`broccoli-react`](https://github.com/eddhannay/broccoli-react). I am not certain whether the transformed code is compatible with other ES6 transforms.
 
 EMF classes are generic. These classes do not assume the use of raw primitive objects. Immutable data structures may be incorporated and no assumption is made that React or any other view library will be used. This keeps the classes adaptable to many different use cases.
 
@@ -135,7 +135,7 @@ This is a React Mixin factory to help bind a component to Stores. The component 
 
 Setting the `pure` parameter to `true` will mutate state solely by this mixin, using `replaceState()` instead of `setState()`. This is useful and faster when all state will be set based on the value computed by `fn`.
 
-The `fn` function has the signature `fn(props Any) Any`. The component's `props` will be passed to the function and whatever is returned will be set on the component's `state`. **This is the only place React should be communicating with the stores.**
+The `fn` function has the signature `fn(props Any) Any` and is bound to the component's `this`. The component's `props` will be passed to the function and whatever is returned will be set on the component's `state`. **This is the only place React should be communicating with the stores.**
 
 # The Name and the Philosophy
 
