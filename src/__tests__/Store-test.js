@@ -19,6 +19,12 @@ describe('Store', function() {
 		store = new Store(dispatcher);
 	});
 
+	it('should not require a dispatcher', function() {
+		expect(function() {
+			var store2 = new Store();
+		}).not.toThrow();
+	});
+
 	it('should set initial state', function() {
 		expect(store.state).toEqual(store.getInitialState());
 	});

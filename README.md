@@ -68,7 +68,7 @@ Stores hold the data. Actors create actions that are dispatched to the Stores th
 
 ### constructor(dispatcher)
 
-Stores are created by by passing a Dispatcher instance. Any events fired from the Dispatcher go to the Store.
+Stores are created by passing a Dispatcher instance. Any events fired from the Dispatcher go to the Store. The dispatcher is optional, but without it the store will not recieve any fired events.
 
 ### getInitialState() Any
 

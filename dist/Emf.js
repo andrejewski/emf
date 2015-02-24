@@ -748,20 +748,21 @@ function cap(str) {
 
 class Store extends EventEmitter {
 	constructor(dispatcher) {
-		this._dispatcher = dispatcher;
-		this._dispatchFunc = this._onDispatch.bind(this);
-		this._dispatchToken = dispatcher.register(this._dispatchFunc);
+		if(dispatcher) {
+			this._dispatcher = dispatcher;
+			this._dispatchFunc = this._onDispatch.bind(this);
+			this._dispatchToken = dispatcher.register(this._dispatchFunc);
+		}
 		this.state = this.getInitialState();
 	}
 
+	// @override
 	getInitialState() {
-		// @override
 		return {};
 	}
 
-	onDispatch(payload, dispatcher) {
-		// @override
-	}
+	// @override
+	onDispatch(payload, dispatcher) {}
 
 	addChangeListener(callback) {
 		this.addListener(changeEvent, callback);
