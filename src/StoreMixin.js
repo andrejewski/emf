@@ -31,11 +31,11 @@ function StoreMixin(stores, pure, fn) {
 		},
 
 		componentWillReceiveProps: function(nextProps) {
-			if(this.isMounted()) mutate(this, fn(nextProps));
+			if(this.isMounted()) mutate(this, fn.call(this, nextProps));
 		},
 
 		_onChange: function() {
-			mutate(this, fn(this.props));
+			mutate(this, fn.call(this, this.props));
 		}
 	};
 }
